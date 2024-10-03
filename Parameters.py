@@ -16,7 +16,7 @@ for i in range(n, n+k):
         W[i, j] = -1
 
 # Problem Parameters, independent of the RV
-p_F = np.array([40, 24, 4, 25, 27, 4.5, 32, 19.2, 3.2, 55, 33, 5.5])
+p_F = np.array([40, 24, 4, 45, 27, 4.5, 32, 19.2, 3.2, 55, 33, 5.5])
 A = np.array([[-1, -1, -1, -1], [10, 7, 16, 6]])
 c = np.array([10, 7, 16, 6])
 

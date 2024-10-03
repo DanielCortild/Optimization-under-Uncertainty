@@ -23,7 +23,7 @@ def g(xi, x=None):
 
 # Compute EV
 x_bar, z_bar, EV = g(xi_exp)
-# print(f"EV Solution X: {x_bar}")
+print(f"EV Solution X: {x_bar}")
 # print(f"EV Solution Z: {z_bar}")
 print(f"EV Value: {EV}")
 
