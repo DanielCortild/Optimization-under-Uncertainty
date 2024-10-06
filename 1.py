@@ -2,7 +2,7 @@ import cvxpy as cp
 import itertools
 
 # Get all problem parameters
-from Parameters import *
+from Parameters1 import *
 
 # Construct the objective function and constraints
 # The optimization problem at hand is min E_xi[g(xi, x)]
@@ -31,13 +31,13 @@ print(f"EV Value: {EV}")
 EEV = 0
 for i, j, r in itertools.product(range(3), range(3), range(3)):
     _, _, v = g([xis[0, i], xis[1, j], xis[2, r]], x_bar)
-    EEV += probs[i]*probs[j]*probs[r] * v
+    EEV += xis_probs[i]*xis_probs[j]*xis_probs[r] * v
 print(f"EEV Value: {EEV}")
 
 # Solve Recourse Model
 x = cp.Variable(n)
 z = cp.Variable((27, n*k))
-objective = cp.Minimize(c @ x + cp.sum([probs[i]*probs[j]*probs[r] * p_F @ z[9*i + 3*j + r] for i, j, r in itertools.product(range(3), range(3), range(3))]))
+objective = cp.Minimize(c @ x + cp.sum([xis_probs[i]*xis_probs[j]*xis_probs[r] * p_F @ z[9*i + 3*j + r] for i, j, r in itertools.product(range(3), range(3), range(3))]))
 constraints = [x >= 0, A @ x <= b]
 for i, j, r in itertools.product(range(3), range(3), range(3)):
     constraints += [
@@ -58,7 +58,7 @@ print(f"VSS Value: {VSS}")
 WS = 0
 for i, j, r in itertools.product(range(3), range(3), range(3)):
     _, _, v = g([xis[0, i], xis[1, j], xis[2, r]])
-    WS += probs[i]*probs[j]*probs[r] * v
+    WS += xis_probs[i]*xis_probs[j]*xis_probs[r] * v
 print(f"WS Value: {WS}")
 
 # Compute the Expected Value of Perfect Information
