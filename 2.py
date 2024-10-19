@@ -12,7 +12,7 @@ def solveProblem():
     x = cp.Variable(n)
 
     # Second stage variables, one per possible realization of the random vector
-    samples = 10
+    samples = 75
     z = cp.Variable((27*samples, n*k))
 
     # Objective function, with explicit evaluation of the finite expectation
@@ -40,7 +40,7 @@ def solveProblem():
 
     # Solve the problem
     prob = cp.Problem(objective, constraints)
-    prob.solve()
+    prob.solve(solver="MOSEK")
 
     return x.value, prob.value
 
