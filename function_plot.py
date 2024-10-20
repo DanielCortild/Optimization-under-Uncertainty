@@ -15,7 +15,7 @@ def plot_result(x,c,n):
     
     T = [10, 16, 17]
 
-    x_inv=c[0:n]*x.value[0:n]
+    x_inv=x.value[0:n]
 
 
     
@@ -38,15 +38,15 @@ def plot_result(x,c,n):
 
     # Labeling axes and title
     plt.xlabel('Technology')
-    plt.ylabel('Investment ($)')
-    plt.title('Investment in Technologies')
+    plt.ylabel('Capacity')
+    plt.title('Results')
 
     # Set x-ticks to whole numbers and enable grid for y-axis
     plt.xticks(range(n))  # Ensuring only whole numbers on the x-axis
     plt.grid(True, axis='y')  # Grid on y-axis only
-    def millions_formatter(x, pos):
-        return f'${x:,.1f}M'
+    def unit_formatter(x, pos):
+        return f'{x:,.2f}'
     # Format the y-axis to include commas and 'M' for millions
-    plt.gca().yaxis.set_major_formatter(mtick.FuncFormatter(millions_formatter))
+    plt.gca().yaxis.set_major_formatter(mtick.FuncFormatter(unit_formatter))
 
     plt.show()
