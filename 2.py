@@ -7,17 +7,94 @@ from pyDOE import lhs
 # Get all problem parameters
 from Parameters2 import *
 
+def solveEVProblem():
+    # First stage variable
+    x = cp.Variable(n)
+
+    # Second stage variables, one per possible realization of the random vector
+    y = cp.Variable(n*k)
+
+    # Objective function, with explicit evaluation of the finite expectation
+    objective = cp.Minimize(c @ x + q_T.flatten() @ y)
+
+    # First stage constraints
+    constraints = [
+        x >= 0,
+        y >= 0,
+        A @ x <= b,
+        cp.vstack(W_apply(y)) <= cp.vstack(h(xi_exp, alpha_exp) - H(xi_exp, alpha_exp) @ x)
+    ]
+
+    # Solve the problem
+    prob = cp.Problem(objective, constraints)
+    prob.solve(solver="MOSEK")
+
+    return x.value, y.value, prob.value
+
+x_star, yse, vra = solveEVProblem()
+
+def computeEEV(x_star, include_alphas=False):
+    # Set up number of samples, depending on whether the random parameter alpha is included or not
+    if include_alphas:
+        samples = 75
+    else:
+        samples = 1
+
+    # Setup the problem variables
+    x = cp.Variable(n)
+    y = cp.Variable((samples * 27, n*k))
+
+    # Objective function, with explicit evaluation of the finite expectation
+    objective = cp.Minimize(c @ x +
+        q_T.flatten() @ cp.sum([xis_probs[i]*xis_probs[j]*xis_probs[r]/samples * y[27*a + 9*i + 3*j + r]
+            for i, j, r, a in itertools.product(range(3), range(3), range(3), range(samples))]))
+
+    constraints = [x >= 0, A @ x <= b]
+
+    if include_alphas:
+        constraints += [x[0] == x_star[0], x[1] == x_star[1], x[2] == x_star[2], x[3] == x_star[3]]
+
+    # Sample alphas using Latin Hypercube Sampling
+    lhs_alphas = lhs(n, samples)
+    # lhs_alphas = np.random.rand(samples, n)
+
+    # Second stage constraints
+    for i, j, r, a in itertools.product(range(3), range(3), range(3), range(samples)):
+        # Retrieve samples
+        xi = [xis[0, i], xis[1, j], xis[2, r]]
+        alpha = np.array([lhs_alphas[a][i] * (alphas[i][1] - alphas[i][0]) + alphas[i][0] for i in range(n)])
+        # alpha = alpha_exp
+
+        # Add constraints
+        constraints += [
+            y[27*a + 9*i + 3*j + r] >= 0,
+            cp.vstack(W_apply(y[27*a + 9*i + 3*j + r])) <= cp.vstack(h(xi, alpha) - H(xi, alpha) @ x)
+        ]
+
+    # Solve the problem
+    prob = cp.Problem(objective, constraints)
+    prob.solve(solver="MOSEK")
+
+    # print(x.value)
+
+    return prob.value
+
+for i in range(10):
+    print(solveEEVProblem(np.array([6.6666666, 4, 0, 2.10526, 4])))
+
+exit()
+
 def solveProblem():
     # First stage variable
     x = cp.Variable(n)
 
     # Second stage variables, one per possible realization of the random vector
     samples = 75
-    z = cp.Variable((27*samples, n*k))
+    y = cp.Variable((27*samples, n*k))
 
     # Objective function, with explicit evaluation of the finite expectation
     objective = cp.Minimize(c @ x +
-        cp.sum([xis_probs[i]*xis_probs[j]*xis_probs[r]/samples * p_F @ z[27*a + 9*i + 3*j + r]
+        cp.sum([xis_probs[i]*xis_probs[j]*xis_probs[r]/samples * q_T.flatten() @ y[27*a + 9*i + 3*j + r]
             for i, j, r, a in itertools.product(range(3), range(3), range(3), range(samples))]))
 
     # First stage constraints
@@ -34,8 +111,8 @@ def solveProblem():
 
         # Add constraints
         constraints += [
-            z[27*a + 9*i + 3*j + r] >= 0,
-            W @ z[27*a + 9*i + 3*j + r] <= h(xi, alpha) - H(xi, alpha) @ x
+            y[27*a + 9*i + 3*j + r] >= 0,
+            W_apply(y[27*a + 9*i + 3*j + r]) <= h(xi, alpha) - H(xi, alpha) @ x
         ]
 
     # Solve the problem

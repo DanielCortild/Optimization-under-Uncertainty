@@ -14,6 +14,10 @@ c = np.array([10, 7, 16, 6])
 # Random Variable xi, its distribution, its expected value and maximum value
 xis = np.array([[3, 5, 7], [2, 3, 4], [1, 2, 3]])
 xis_probs = np.array([0.3, 0.4, 0.3])
+xis_flat = [(
+    [xis[0, i], xis[1, j], xis[2, l]],
+    xis_probs[i] * xis_probs[j] * xis_probs[l]
+) for i in range(3) for j in range(3) for l in range(3)]
 xi_exp = np.array([xis_probs.T @ xi for xi in xis])
 xi_max = np.array([max(xi) for xi in xis])
 
@@ -40,4 +44,5 @@ for a in range(n+k):
                 W[a, i, j] = 1
             if j == a-n and n+1 <= a+1 <= n+k:
                 W[a, i, j] = -1
-W_apply = lambda z_var: [W[i,:,:].flatten() @ z_var for i in range(n+k)]
+W_apply = lambda y: [W[i].flatten() @ y for i in range(n+k)]
+W_T_apply = lambda lamb: sum([lamb[i] * W[i] for i in range(n+k)])

@@ -6,33 +6,72 @@ from Parameters1 import *
 
 # Construct the objective function and constraints
 # The optimization problem at hand is min E_xi[g(xi, x)]
-def g(xi, x=None):
-    # If x is not provided, it is a variable
-    if x is None:
-        x = cp.Variable(n)
-    # Otherwise, it is considered fixed and is a parameter
-    else:
-        x = cp.Parameter(n, value=x)
-    y = cp.Variable(n * k)
-    objective = cp.Minimize(c @ x + q_T.flatten() @ z)
-    constraints = [
-        x >= 0,
-        y >= 0,
-        cp.vstack(W_apply(y)) <= cp.vstack(h(xi) - H(xi) @ x),
-        (A @ x)[1] <= b[1]
-    ]
+def g():
+    S = 27
+    samples = 10
 
-    prob = cp.Problem(objective, constraints)
-    prob.solve()
+    x = cp.Variable(n)
+    s = cp.Variable(len(b))
+    objective = cp.Minimize(c @ x)
+    constraints = [x >= 0, s >= 0, A @ x + s == b]
+    iniprob = cp.Problem(objective, constraints)
+    iniprob.solve()
 
-    return x.value, z.value, prob.value
+    theta = cp.Variable(1)
+    objective = cp.Minimize(c @ x + theta)
+
+    for _ in range(10):
+        x_i = x.value
+        Qxi = 0
+        ui = np.zeros(n)
+        unbounded_probs = 0
+        lamb = cp.Variable(n+k)
+        y = cp.Variable(n*k)
+
+        for s in range(S):
+            xi, xi_prob = xis_flat[s]
+            hs = h(xi)
+            Hs = H(xi)
+            # Primal
+            # subobjective = cp.Minimize(q_T.flatten() @ y)
+            # subconstraints = [
+            #     y >= 0, cp.vstack(W_apply(y)) <= cp.vstack(hs - Hs @ x_i)
+            # ]
+            # Dual
+            subobjective = cp.Maximize(lamb.T @ (hs - Hs @ x_i))
+            subconstraints = [
+                cp.vstack(W_T_apply(lamb.T).T.flatten()) <= cp.vstack(q_T.flatten()),
+                lamb <= 0
+            ]
+            subprob = cp.Problem(subobjective, subconstraints)
+            subprob.solve(solver='MOSEK')
+
+            if subprob.status == cp.UNBOUNDED:
+                unbounded_probs += xi_prob
+            else:
+                Qxi += xi_prob * lamb.T.value @ (hs - Hs @ x_i)
+                ui -= xi_prob * lamb.T.value @ Hs
+
+        alpha_i = (Qxi - np.dot(ui, x_i)) / (1 - unbounded_probs)
+        beta_i = ui / (1 - unbounded_probs)
+
+        constraints += [theta >= alpha_i + beta_i.reshape((1, n)) @ x]
+
+        masterproblem = cp.Problem(objective, constraints)
+        masterproblem.solve(solver='MOSEK')
+
+        print(masterproblem.value)
+
+
+g()
+
+exit()
 
 # Compute EV
 x_bar, z_bar, EV = g(xi_exp)
 print(f"EV Solution X: {x_bar}")
 # print(f"EV Solution Z: {z_bar}")
 print(f"EV Value: {EV}")
-
 # Compute EEV
 EEV = 0
 for i, j, r in itertools.product(range(3), range(3), range(3)):
