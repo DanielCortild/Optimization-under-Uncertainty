@@ -1,0 +1,67 @@
+X: [3.167 5.    1.833 4.   ]
+Samples: 100
+410.86197183525104
+X: [3.167 5.    1.833 4.   ]
+Samples: 100
+410.880015258129
+X: [3.167 5.    1.833 4.   ]
+Samples: 100
+410.9123981773049
+X: [3.167 5.    1.833 4.   ]
+Samples: 100
+410.9158131506555
+X: [3.167 5.    1.833 4.   ]
+Samples: 100
+410.88279591898356
+X: [3.167 5.    1.833 4.   ]
+Samples: 100
+410.92427517444276
+X: [3.167 5.    1.833 4.   ]
+Samples: 100
+410.86265748498795
+X: [3.167 5.    1.833 4.   ]
+Samples: 100
+410.8771346247087
+X: [3.167 5.    1.833 4.   ]
+Samples: 100
+410.8532946585724
+X: [3.167 5.    1.833 4.   ]
+Samples: 100
+410.818092746365
+
+###############################################################################
+Hábrók Cluster
+Job 13483340 for user s4279239
+Finished at: Mon Oct 21 20:51:51 CEST 2024
+
+Job details:
+============
+
+Job ID                         : 13483340
+Name                           : stopro
+User                           : s4279239
+Partition                      : regularshort
+Nodes                          : node109
+Number of Nodes                : 1
+Cores                          : 128
+Number of Tasks                : 1
+State                          : RUNNING  
+Submit                         : 2024-10-21T20:44:27
+Start                          : 2024-10-21T20:44:28
+End                            : --
+Reserved walltime              : 06:00:00
+Used walltime                  : 00:07:23
+Used CPU time                  : -- 
+% User (Computation)           : --
+% System (I/O)                 : --
+Total memory reserved          : 2000M
+Maximum memory used            : --
+
+Acknowledgements:
+=================
+
+Please see this page for information about acknowledging Hábrók in your publications:
+
+https://wiki.hpc.rug.nl/habrok/introduction/scientific_output
+
+################################################################################

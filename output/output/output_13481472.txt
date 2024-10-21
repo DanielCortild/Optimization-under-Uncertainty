@@ -1,0 +1,47 @@
+410.88807670388906
+410.9836165191744
+410.8003937761794
+410.9040546131872
+410.83884256220426
+410.8080572906475
+410.80061608158917
+410.86938950311253
+410.9078191562117
+410.8190140232517
+
+###############################################################################
+Hábrók Cluster
+Job 13481472 for user s4279239
+Finished at: Mon Oct 21 20:15:29 CEST 2024
+
+Job details:
+============
+
+Job ID                         : 13481472
+Name                           : stopro
+User                           : s4279239
+Partition                      : regularshort
+Nodes                          : node106
+Number of Nodes                : 1
+Cores                          : 128
+Number of Tasks                : 1
+State                          : RUNNING  
+Submit                         : 2024-10-21T20:13:46
+Start                          : 2024-10-21T20:13:48
+End                            : --
+Reserved walltime              : 06:00:00
+Used walltime                  : 00:01:41
+Used CPU time                  : -- 
+% User (Computation)           : --
+% System (I/O)                 : --
+Total memory reserved          : 2000M
+Maximum memory used            : --
+
+Acknowledgements:
+=================
+
+Please see this page for information about acknowledging Hábrók in your publications:
+
+https://wiki.hpc.rug.nl/habrok/introduction/scientific_output
+
+################################################################################

@@ -1,0 +1,37 @@
+
+###############################################################################
+Hábrók Cluster
+Job 13479126 for user s4279239
+Finished at: Mon Oct 21 20:35:21 CEST 2024
+
+Job details:
+============
+
+Job ID                         : 13479126
+Name                           : stopro
+User                           : s4279239
+Partition                      : regularshort
+Nodes                          : node109
+Number of Nodes                : 1
+Cores                          : 128
+Number of Tasks                : 1
+State                          : TIMEOUT  
+Submit                         : 2024-10-21T19:34:58
+Start                          : 2024-10-21T19:34:59
+End                            : 2024-10-21T20:35:20
+Reserved walltime              : 01:00:00
+Used walltime                  : 01:00:21
+Used CPU time                  : -- (Efficiency:  0.00%)
+% User (Computation)           :  0.00%
+% System (I/O)                 : 100.00%
+Total memory reserved          : 2000M
+Maximum memory used            : 0.00 
+
+Acknowledgements:
+=================
+
+Please see this page for information about acknowledging Hábrók in your publications:
+
+https://wiki.hpc.rug.nl/habrok/introduction/scientific_output
+
+################################################################################

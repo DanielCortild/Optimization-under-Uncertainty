@@ -13,7 +13,7 @@ from Parameters2 import *
 # The optimization problem at hand is min E_xi[g(xi, x)]
 def g():
     S = 27
-    samples = 1
+    samples = 1000
     lhs_alphas = lhs(n, samples)
 
     x = cp.Variable(n)
@@ -28,7 +28,7 @@ def g():
 
     objectives = []
 
-    for _ in (pbar := tqdm(range(10))):
+    for _ in (pbar := tqdm(range(100))):
         pbar.set_description(f"Objective: {masterproblem.value}")
         x_i = x.value
         lamb = cp.Variable(n+k)
@@ -49,7 +49,7 @@ def g():
                 lamb <= 0
             ]
             subprob = cp.Problem(subobjective, subconstraints)
-            subprob.solve(solver='MOSEK')
+            subprob.solve()
 
             return prob * lamb.T.value @ (hs - Hs @ x_i), -prob * lamb.T.value @ Hs
 
@@ -65,7 +65,7 @@ def g():
         constraints += [theta >= alpha_i + beta_i.reshape((1, n)) @ x]
 
         masterproblem = cp.Problem(objective, constraints)
-        masterproblem.solve(solver='MOSEK')
+        masterproblem.solve()
 
         objectives.append(masterproblem.value)
 
@@ -76,4 +76,7 @@ def g():
     name = time.time()
     plt.savefig(f"plots/{name}.png", bbox_inches='tight')
 
-g()
+    print("Corres X:", x.value)
+
+for _ in range(1):
+    g()

@@ -1,0 +1,43 @@
+
+###############################################################################
+Hábrók Cluster
+Job 13478654 for user s4279239
+Finished at: Mon Oct 21 20:02:02 CEST 2024
+
+Job details:
+============
+
+Job ID                         : 13478654
+Name                           : stopro
+User                           : s4279239
+Partition                      : regularshort
+Nodes                          : node106
+Number of Nodes                : 1
+Cores                          : 128
+Number of Tasks                : 1
+State                          : COMPLETED  
+Submit                         : 2024-10-21T19:27:17
+Start                          : 2024-10-21T19:27:18
+End                            : 2024-10-21T20:02:02
+Reserved walltime              :   01:00:00
+Used walltime                  :   00:34:44
+Used CPU time                  : 1-05:29:37 (Efficiency: 39.80%)
+% User (Computation)           : 71.55%
+% System (I/O)                 : 28.45%
+Total memory reserved          : 2000M
+Maximum memory used            : 5.44G
+Hints and tips      :
+ 1) The program efficiency is low. Your program is not using the assigned cores
+    effectively. Please check if you are using all the cores you requested.
+    You may also need to check the file in- and output pattern of your program.
+ *) For more information on these issues see:
+    https://wiki.hpc.rug.nl/habrok/additional_information/job_hints
+
+Acknowledgements:
+=================
+
+Please see this page for information about acknowledging Hábrók in your publications:
+
+https://wiki.hpc.rug.nl/habrok/introduction/scientific_output
+
+################################################################################
