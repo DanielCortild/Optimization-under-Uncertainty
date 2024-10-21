@@ -3,6 +3,8 @@ import itertools
 from pyDOE import lhs
 import multiprocess as mp
 from tqdm import tqdm
+import matplotlib.pyplot as plt
+import time
 
 # Get all problem parameters
 from Parameters2 import *
@@ -26,7 +28,7 @@ def g():
 
     objectives = []
 
-    for _ in (pbar := tqdm(range(100))):
+    for _ in (pbar := tqdm(range(10))):
         pbar.set_description(f"Objective: {masterproblem.value}")
         x_i = x.value
         lamb = cp.Variable(n+k)
@@ -67,6 +69,11 @@ def g():
 
         objectives.append(masterproblem.value)
 
-    print(objectives)
+    plt.plot(objectives)
+    plt.yscale("log")
+    plt.xlabel("Iteration")
+    plt.ylabel("Master Problem Objective Values")
+    name = time.time()
+    plt.savefig(f"plots/{name}.png", bbox_inches='tight')
 
 g()
