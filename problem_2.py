@@ -67,8 +67,9 @@ def computeEEV(x_star):
     # Solve the problem
     prob = cp.Problem(objective, constraints)
     prob.solve()
-
-    return prob.value
+    EEV=prob.value
+    print(f"EEV Value: {EEV}")
+    return EEV
 
 def solveRecourseProblem():
     # First stage variable
