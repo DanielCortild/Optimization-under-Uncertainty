@@ -41,10 +41,8 @@ def g():
             prob = xi_prob * alpha_prob
             hs = h(xi, alpha)
             Hs = H(xi, alpha)
-            x_new = cp.Variable(n)
             subobjective = cp.Maximize(lamb.T @ (hs - Hs @ x_i))
             subconstraints = [
-                cp.vstack(x_new[:-1]) == cp.vstack(x_i[:-1]),
                 cp.vstack(W_T_apply(lamb.T).T.flatten()) <= cp.vstack(q_T.flatten()),
                 lamb <= 0
             ]

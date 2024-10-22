@@ -1,0 +1,38 @@
+Corres X: [5.79324302e+00 5.25982961e+00 4.82955660e-10 1.61317807e+00]
+
+###############################################################################
+Hábrók Cluster
+Job 13483901 for user s4279239
+Finished at: Mon Oct 21 21:07:14 CEST 2024
+
+Job details:
+============
+
+Job ID                         : 13483901
+Name                           : stopro
+User                           : s4279239
+Partition                      : regularshort
+Nodes                          : node105
+Number of Nodes                : 1
+Cores                          : 128
+Number of Tasks                : 1
+State                          : RUNNING  
+Submit                         : 2024-10-21T20:53:39
+Start                          : 2024-10-21T20:53:40
+End                            : --
+Reserved walltime              : 06:00:00
+Used walltime                  : 00:13:34
+Used CPU time                  : -- 
+% User (Computation)           : --
+% System (I/O)                 : --
+Total memory reserved          : 2000M
+Maximum memory used            : --
+
+Acknowledgements:
+=================
+
+Please see this page for information about acknowledging Hábrók in your publications:
+
+https://wiki.hpc.rug.nl/habrok/introduction/scientific_output
+
+################################################################################

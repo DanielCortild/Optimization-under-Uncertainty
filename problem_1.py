@@ -34,6 +34,7 @@ def solveEVProblem(hide_output=False):
         print(f"EV Solution X: {x_bar}")
         print(f"EV Value: {EV}")
     return x_bar,y_bar,EV
+    
 def computeEEV():
     # Compute EEV
     x_bar,_,_=solveEVProblem(hide_output=True)
