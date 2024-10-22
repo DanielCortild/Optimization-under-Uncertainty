@@ -27,10 +27,10 @@ alpha_exp = np.array([0.5 * (a + b) for a, b in alphas])
 
 # Matrix q_T, to model the second-order objective
 # Production costs
-q_import = np.array([4.0, 4.5, 3.2, 5.5, 10])
+q = np.array([4.0, 4.5, 3.2, 5.5, 10])
 # Duration of modes
 T = np.array([10, 6, 1])
-q_T_import = np.outer(q, T)
+q_T = np.outer(q, T)
 
 # Matrix A and vector b, to model the first-stage constraints
 A = np.array([c])
