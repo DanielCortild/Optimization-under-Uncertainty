@@ -5,7 +5,6 @@
 import sys
 sys.path.append('../src')
 from ElectricityInvestmentPlanning import Problem1
-
 def main():
     print("-------------")
     print("| Problem 1 |")
@@ -17,22 +16,27 @@ def main():
     print("EVS Solution X: ", x_EVS)
     print("EVS Value: ", EV, f"({round(spent_time, 2)}s)")
     print()
+    Problem1.plot_capacity(x_EVS,"EV Problem")
 
     # Get Expected Result
     EEV, spent_time = Problem1.getEEV(x_EVS)
     print("EEV Value: ", EEV, f"({round(spent_time, 2)}s)")
     print()
 
+
     # Get Wait-And-See
     WS, spent_time = Problem1.getWS()
     print("WS Value: ", WS, f"({round(spent_time, 2)}s)")
     print()
+    Problem1.plot_capacity(x_EVS,"EV Solution")
+
 
     # Get the Two-Stage Solution
     x_TS, TS, spent_time = Problem1.getTS()
     print("TS Solution X: ", x_TS)
     print("TS Value: ", TS, f"({round(spent_time, 2)}s)")
     print()
+    Problem1.plot_capacity(x_TS,"TS Solution")
 
     # Compute the Expected Value of Perfect Information
     EVPI = TS - WS
@@ -43,5 +47,7 @@ def main():
     VSS = EEV - TS
     print("VSS Value: ", VSS)
     print()
+    Problem1.plot_solutions(WS, EV, TS, EEV)
+    Problem1.plot_technologies()
 if __name__ == "__main__":
     main()

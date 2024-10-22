@@ -39,6 +39,10 @@ Ts_exp = np.array([Ts_probs.T @ Ts for Ts in Ts])
 # Matrix q_T, to model the second-order objective
 q_T = np.outer(q, T)
 q_T_import = np.outer(q_import, T)
+q_Ts = np.array([np.outer(q_import, np.array([T[0], Ts[0, i], Ts[1, j]])) 
+                for i in range(2) for j in range(2)])
+q_Ts_probs = np.array([Ts_probs[i] * Ts_probs[j] for i in range(2) for j in range(2)])
+q_Ts_exp = sum([q_Ts_probs[i] * q_Ts[i] for i in range(4)])
 
 # Matrix A and vector b, to model the first-stage constraints
 A = np.array([[-1, -1, -1, -1], c])
@@ -47,7 +51,7 @@ b = np.array([-sum(xi_max), cmax])
 b_import = np.array([cmax])
 
 # Matrices W, H and h, to model the second-stage constraints
-H = lambda xi, alpha=np.ones(n): np.concatenate([-np.eye(n), np.zeros((k, n))])
+H = lambda xi, alpha=np.ones(n): np.concatenate([-np.diag(alpha), np.zeros((k, n))])
 h = lambda xi, alpha=np.ones(n): np.array([0, 0, 0, 0, -xi[0], -xi[1], -xi[2]])
 W = np.zeros((n + k, n,  k))
 for a in range(n+k):

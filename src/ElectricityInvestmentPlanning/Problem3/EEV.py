@@ -11,23 +11,24 @@ from ..Parameters import *
 
 def getSingleEEV(x_bar, alpha):
     # Second stage variables
-    y = cp.Variable((27, (n+1) * k))
+    y = cp.Variable((27*4, (n+1) * k))
 
     # Objective function, with explicit evaluation of the finite expectation
     objective = cp.Minimize(c @ x_bar +
-        q_T_import.flatten() @ cp.sum([xis_probs[i]*xis_probs[j]*xis_probs[r] * y[9*i + 3*j + r]
-            for i, j, r in itertools.product(range(3), range(3), range(3))]))
+        cp.sum([xis_probs[i]*xis_probs[j]*xis_probs[r]*q_Ts_probs[l] * 
+                q_Ts_exp.flatten() @ y[27*l + 9*i + 3*j + r]
+                            for i, j, r, l in itertools.product(range(3), range(3), range(3), range(4))]))
 
     # Second stage constraints
     constraints = []
-    for i, j, r in itertools.product(range(3), range(3), range(3)):
+    for i, j, r, l in itertools.product(range(3), range(3), range(3), range(4)):
         # Retrieve samples
         xi = [xis[0, i], xis[1, j], xis[2, r]]
 
         # Add constraints
         constraints += [
-            y[9*i + 3*j + r] >= 0,
-            cp.vstack(W_import_apply(y[9*i + 3*j + r])) <= cp.vstack(h(xi, alpha) - H(xi, alpha) @ x_bar)
+            y[27*l + 9*i + 3*j + r] >= 0,
+            cp.vstack(W_import_apply(y[27*l + 9*i + 3*j + r])) <= cp.vstack(h(xi, alpha) - H(xi, alpha) @ x_bar)
         ]
 
     # Formulate and solve the problem
@@ -50,6 +51,6 @@ def getEEV(x_bar, samples):
     # Run the tasks in parallel
     start = time.time()
     with mp.Pool() as pool:
-        result = list(tqdm(pool.imap(task, range(samples)), leave=False, total=samples))
+        result = pool.map(task, range(samples))
 
     return np.mean(result), time.time() - start

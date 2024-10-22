@@ -53,7 +53,10 @@ def getTSPlot_Naive(samples, counts):
     return getTSPlot(counts, lambda: getTS_Naive(samples), "Naive")
 
 def getTSPlot_LShaped(samples, iterations, counts):
-    return getTSPlot(counts, lambda: np.array(getTS_LShaped(samples, iterations))[0,1,3], "L-Shaped")
+    def getTS():
+        x, obj, obj_lst, tme = getTS_LShaped(samples, iterations)
+        return x, obj, tme
+    return getTSPlot(counts, getTS, "L-Shaped")
 
 def getTSPlot_LShaped_Convergence(samples, iterations):
     # Retrieve the objective values
@@ -61,7 +64,7 @@ def getTSPlot_LShaped_Convergence(samples, iterations):
 
     # Plot the convergence
     plt.figure(figsize=(8, 4))
-    plt.plot(objectives)
+    plt.plot(obj_vals)
     plt.yscale("log")
     plt.xlabel("Iteration")
     plt.ylabel("Master Problem Objective Values")
