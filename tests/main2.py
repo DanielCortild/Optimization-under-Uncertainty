@@ -41,7 +41,7 @@ numbers = {
 }
 mode = "cluster"
 
-def main():
+if __name__ == "__main__":
     print("-------------")
     print("| Problem 2 |")
     print("-------------")
@@ -119,5 +119,3 @@ def main():
     EVPI = TS_L_Shaped - WS
     print("EVPI Value: ", EVPI)
     print()
-if __name__ == "__main__":
-    main()    
