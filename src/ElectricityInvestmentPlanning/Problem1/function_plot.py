@@ -50,7 +50,7 @@ def plot_solutions(WS,EV,TS,EEV):
     ax.set_title('Solution Comparison')
     file_path = f"../output/problem_1_solutions.png"
     plt.savefig(file_path)
-def plot_technologies(c=c, q=q, n=4):
+def plot_costs(c=c, q=q, n=4):
     # Ensure the vectors c and c_prod are of the correct size
     c_inv = c
     c_prod_inv = q
@@ -75,8 +75,8 @@ def plot_technologies(c=c, q=q, n=4):
     
     # Labeling the axes and setting the title
     ax.set_xlabel('Technology')
-    ax.set_ylabel('Production Cost')
-    ax.set_title(f'Production Costs by Technologies')
+    ax.set_ylabel('Cost')
+    ax.set_title(f'Cost by Technology')
     
     # Set x-ticks with appropriate labels
     ax.set_xticks(x)
