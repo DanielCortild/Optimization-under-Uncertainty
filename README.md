@@ -6,3 +6,4 @@
 
 - [Part 1](tests/main1.py)
 - [Part 2](tests/main2.py)
+- [Part 3](tests/main3.py)
