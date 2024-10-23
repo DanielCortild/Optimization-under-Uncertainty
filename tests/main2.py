@@ -4,44 +4,16 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
+from params import params
 
 import sys
 sys.path.append('../src')
 from ElectricityInvestmentPlanning import Problem1
 from ElectricityInvestmentPlanning import Problem2
 
-numbers = {
-    "cluster": {
-        "EEV_Samples": 10000,
-        "WS_Samples": 10000,
-        "TS_Naive_Samples": 100,
-        "TS_Naive_Counts": 100,
-        "TS_LShaped_Samples": 1000,
-        "TS_LShaped_Iterations": 100,
-        "TS_LShaped_Counts": 10,
-    },
-    "local": {
-        "EEV_Samples": 100,
-        "WS_Samples": 100,
-        "TS_Naive_Samples": 50,
-        "TS_Naive_Counts": 10,
-        "TS_LShaped_Samples": 100,
-        "TS_LShaped_Iterations": 50,
-        "TS_LShaped_Counts": 10,
-    },
-    "test": {
-        "EEV_Samples": 2,
-        "WS_Samples": 2,
-        "TS_Naive_Samples": 2,
-        "TS_Naive_Counts": 2,
-        "TS_LShaped_Samples": 2,
-        "TS_LShaped_Iterations": 2,
-        "TS_LShaped_Counts": 2,
-    }
-}
-mode = "cluster"
-
 def main():
+    print(params)
+
     print("-------------")
     print("| Problem 2 |")
     print("-------------")
@@ -72,7 +44,7 @@ def main():
     print()
 
     # Compute Expected Result for each EVS
-    samples = numbers[mode]["EEV_Samples"] # Number of LHS samples. Programs are solved separately for each sample.
+    samples = params["EEV_Samples"] # Number of LHS samples. Programs are solved separately for each sample.
     EEV_fix, spent_time = Problem2.getEEV(x_EVS_fix, samples)
     print("EEV Solution (xi fixed): ", EEV_fix, f"({round(spent_time, 2)}s)")
     EEV, spent_time = Problem2.getEEV(x_EVS, samples)
@@ -84,33 +56,35 @@ def main():
     print(f"Samples: {samples}")
     print()
 
+    exit()
+
     # Compute the Wait-And-See solution
-    samples = numbers[mode]["WS_Samples"] # Number of LHS samples. Programs are solved separately for each sample.
+    samples = params["WS_Samples"] # Number of LHS samples. Programs are solved separately for each sample.
     WS, spent_time = Problem2.getWS(samples)
     print("WS Solution: ", WS, f"({round(spent_time, 2)}s)")
     print(f"Samples: {samples}")
     print()
 
     # Compute the TS solution using a naive sampling approach
-    samples = numbers[mode]["TS_Naive_Samples"] # Number of LHS samples. Programs are not separate.
-    counts = numbers[mode]["TS_Naive_Counts"] # Number of times to run algorithm to observe variety
+    samples = params["TS_Naive_Samples"] # Number of LHS samples. Programs are not separate.
+    counts = params["TS_Naive_Counts"] # Number of times to run algorithm to observe variety
     TS_Naive, time_spent = Problem2.getTSPlot_Naive(samples, counts)
     print("TS Naive Solution: ", TS_Naive, f"({round(time_spent, 2)}s)")
     print(f"Samples: {samples}, Counts: {counts}")
     print()
 
     # Compute the TS solution using an L-shaped algorithm
-    samples = numbers[mode]["TS_LShaped_Samples"] # Number of LHS samples. Programs are separate to a certain extent.
-    iterations = numbers[mode]["TS_LShaped_Iterations"] # Number of iterations to run the algorithm
-    counts = numbers[mode]["TS_LShaped_Counts"] # Number of times to run algorithm to observe variety
+    samples = params["TS_LShaped_Samples"] # Number of LHS samples. Programs are separate to a certain extent.
+    iterations = params["TS_LShaped_Iterations"] # Number of iterations to run the algorithm
+    counts = params["TS_LShaped_Counts"] # Number of times to run algorithm to observe variety
     TS_L_Shaped, time_spent = Problem2.getTSPlot_LShaped(samples, iterations, counts)
     print("TS L-Shaped Solution: ", TS_L_Shaped, f"({round(time_spent, 2)}s)")
     print(f"Samples: {samples}, Iterations: {iterations}, Counts: {counts}")
     print()
 
     # Plot the convergence of the L-shaped algorithm
-    samples = numbers[mode]["TS_LShaped_Samples"] # Number of LHS samples. Programs are separate to a certain extent.
-    iterations = numbers[mode]["TS_LShaped_Iterations"] # Number of iterations to run the algorithm
+    samples = params["TS_LShaped_Samples"] # Number of LHS samples. Programs are separate to a certain extent.
+    iterations = params["TS_LShaped_Iterations"] # Number of iterations to run the algorithm
     Problem2.getTSPlot_LShaped_Convergence(samples, iterations)
     print(f"Samples: {samples}, Iterations: {iterations}")
     print()

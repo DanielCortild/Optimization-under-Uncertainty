@@ -23,3 +23,7 @@ Samples: 1000
 WS Solution:  393.8381629843 (240.53s)
 Samples: 1000
 
+Figure saved as plots/TS_Naive_1729706195.8432305.png
+TS Naive Solution:  410.88892500420934 (46.35s)
+Samples: 100, Counts: 100
+

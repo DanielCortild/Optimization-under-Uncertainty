@@ -7,6 +7,8 @@
 #SBATCH --output=output/output/output_%j.txt    # Output file
 #SBATCH --error=output/error/error_%j.txt       # Error file
 
+cd ..
 . venv/bin/activate
+cd tests
 module load Python/3.11.5-GCCcore-13.2.0
 python3 main2.py $*
