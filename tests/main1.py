@@ -5,8 +5,7 @@
 import sys
 sys.path.append('../src')
 from ElectricityInvestmentPlanning import Problem1
-
-if __name__ == "__main__":
+def main():
     print("-------------")
     print("| Problem 1 |")
     print("-------------")
@@ -17,11 +16,13 @@ if __name__ == "__main__":
     print("EVS Solution X: ", x_EVS)
     print("EVS Value: ", EV, f"({round(spent_time, 2)}s)")
     print()
+    Problem1.plot_capacity(x_EVS,"EV Problem")
 
     # Get Expected Result
     EEV, spent_time = Problem1.getEEV(x_EVS)
     print("EEV Value: ", EEV, f"({round(spent_time, 2)}s)")
     print()
+
 
     # Get Wait-And-See
     WS, spent_time = Problem1.getWS()
