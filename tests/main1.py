@@ -5,6 +5,7 @@
 import sys
 sys.path.append('../src')
 from ElectricityInvestmentPlanning import Problem1
+
 def main():
     print("-------------")
     print("| Problem 1 |")
@@ -44,3 +45,6 @@ def main():
     VSS = EEV - TS
     print("VSS Value: ", VSS)
     print()
+
+if __name__ == "__main__":
+    main()

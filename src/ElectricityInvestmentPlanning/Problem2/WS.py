@@ -56,4 +56,4 @@ def getWS(samples):
     with mp.Pool() as pool:
         result = list(tqdm(pool.imap(task, itertools.product(range(27), range(samples))), leave=False, total=27*samples))
 
-    return np.mean(result), time.time() - start
+    return np.sum(result), time.time() - start

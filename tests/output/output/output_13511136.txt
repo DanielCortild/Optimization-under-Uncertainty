@@ -1,0 +1,25 @@
+-------------
+| Problem 2 |
+-------------
+
+EVS Solution (xi fixed) X:  [1.30158501e+00 1.69841500e+00 5.00000000e+00 2.51591381e-08]
+EVS Value (xi fixed):  362.00000013822705 (0.03s)
+
+EVS Solution (xi variable) X:  [6.66666665e+00 4.00000005e+00 1.11866761e-07 2.10526305e+00]
+EVS Value (xi variable):  409.70524696879045 (0.1s)
+
+EVS Solution (Problem 1) X:  [2.8333334  3.00000012 2.16666662 5.99999986]
+EVS Value (Problem 1):  394.66666674867713 (0.01s)
+
+TS Solution (Problem 1) X:  [3.16666667 5.         1.83333333 4.        ]
+TS Value (Problem 1):  397.7513337663379 (0.1s)
+
+EEV Solution (xi fixed):  478.860565846174 (80.21s)
+EEV Solution (xi variable):  411.13063428983224 (82.85s)
+EEV Solution (Problem 1):  424.69738737184093 (83.59s)
+EEV Solution (TS Problem 1):  418.16358655188316 (83.81s)
+Samples: 1000
+
+WS Solution:  393.8381629843 (240.53s)
+Samples: 1000
+

@@ -1,0 +1,37 @@
+
+###############################################################################
+Hábrók Cluster
+Job 13498863 for user s4279239
+Finished at: Tue Oct 22 23:16:18 CEST 2024
+
+Job details:
+============
+
+Job ID                         : 13498863
+Name                           : SP2
+User                           : s4279239
+Partition                      : regularmedium
+Nodes                          : node42
+Number of Nodes                : 1
+Cores                          : 128
+Number of Tasks                : 1
+State                          : RUNNING  
+Submit                         : 2024-10-22T21:42:50
+Start                          : 2024-10-22T23:16:16
+End                            : --
+Reserved walltime              : 12:00:00
+Used walltime                  : 00:00:02
+Used CPU time                  : -- 
+% User (Computation)           : --
+% System (I/O)                 : --
+Total memory reserved          : 2000M
+Maximum memory used            : --
+
+Acknowledgements:
+=================
+
+Please see this page for information about acknowledging Hábrók in your publications:
+
+https://wiki.hpc.rug.nl/habrok/introduction/scientific_output
+
+################################################################################

@@ -1,0 +1,53 @@
+-------------
+| Problem 2 |
+-------------
+
+EVS Solution (xi fixed) X:  [1.30158501e+00 1.69841500e+00 5.00000000e+00 2.51591381e-08]
+EVS Value (xi fixed):  362.00000013822705 (0.04s)
+
+EVS Solution (xi variable) X:  [6.66666665e+00 4.00000005e+00 1.11866761e-07 2.10526305e+00]
+EVS Value (xi variable):  409.70524696879045 (0.1s)
+
+EVS Solution (Problem 1) X:  [2.8333334  3.00000012 2.16666662 5.99999986]
+EVS Value (Problem 1):  394.66666674867713 (0.01s)
+
+TS Solution (Problem 1) X:  [3.16666667 5.         1.83333333 4.        ]
+TS Value (Problem 1):  397.7513337663379 (0.09s)
+
+
+###############################################################################
+Hábrók Cluster
+Job 13510911 for user s4279239
+Finished at: Wed Oct 23 18:17:12 CEST 2024
+
+Job details:
+============
+
+Job ID                         : 13510911
+Name                           : SP2
+User                           : s4279239
+Partition                      : regularmedium
+Nodes                          : node100
+Number of Nodes                : 1
+Cores                          : 1
+Number of Tasks                : 1
+State                          : RUNNING  
+Submit                         : 2024-10-23T18:14:49
+Start                          : 2024-10-23T18:16:44
+End                            : --
+Reserved walltime              : 12:00:00
+Used walltime                  : 00:00:28
+Used CPU time                  : -- 
+% User (Computation)           : --
+% System (I/O)                 : --
+Total memory reserved          : 2000M
+Maximum memory used            : --
+
+Acknowledgements:
+=================
+
+Please see this page for information about acknowledging Hábrók in your publications:
+
+https://wiki.hpc.rug.nl/habrok/introduction/scientific_output
+
+################################################################################

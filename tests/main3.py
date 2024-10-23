@@ -9,7 +9,7 @@ import sys
 sys.path.append('../src')
 from ElectricityInvestmentPlanning import Problem1, Problem2, Problem3
 
-if __name__ == "__main__":
+def main():
     print("-------------")
     print("| Problem 3 |")
     print("-------------")
@@ -40,3 +40,6 @@ if __name__ == "__main__":
     samples = 10 # Number of LHS samples. Programs are not separate.
     iterations = 100 # Number of iterations for L-Shaped algorithm
     x_TS_LShaped, TS_LShaped, _, time_spent = Problem3.getTS_LShaped(samples, iterations)
+
+if __name__ == "__main__":
+    main()
