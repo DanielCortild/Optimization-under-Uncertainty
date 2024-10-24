@@ -31,7 +31,7 @@ def plot_solutions(WS,EV,TS,EEV,prefix="problem_1"):
     values = [EV, WS, TS, EEV]
 
     # Set up the figure
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(5, 3))
 
     # Define the color palette from Set2
     colors = plt.get_cmap('Set1')(np.arange(len(columns)))
