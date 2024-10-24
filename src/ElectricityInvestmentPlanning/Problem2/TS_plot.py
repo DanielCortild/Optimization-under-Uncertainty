@@ -83,14 +83,12 @@ def plot_costs( n=5):
     
     # Generate x positions for the bars
     x = np.arange(n)
-    width = 0.35  # Width of the bars
-
     # Create the plot
-    fig, ax = plt.subplots(figsize=(10, 6))
+    fig, ax = plt.subplots(figsize=(5, 3))
     
     # Define color map for the bars
     colors = plt.cm.viridis(np.linspace(0, 1, n))
-    width = 0.1 
+    width = 0.2 
     # Plot bars for the two sets of values (c and c_prod)
     bars1 = ax.bar(x - width, c_inv, width, label='Investment Costs', color=colors, hatch='//')  # Diagonal stripes
     bars2 = ax.bar(x + width, c_prod_inv, width, label='Production Costs', color=colors, hatch='xx')  # Crosshatch pattern
@@ -103,6 +101,7 @@ def plot_costs( n=5):
     ax.set_xlabel('Technology')
     ax.set_ylabel('Cost')
     ax.set_title(f'Cost by Technology')
+    ax.tick_params(axis='x', which='major', labelsize=15)
     
     # Set x-ticks with appropriate labels
     ax.set_xticks(x)

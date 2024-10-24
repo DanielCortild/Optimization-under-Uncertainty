@@ -25,7 +25,7 @@ def plot_capacity(x,title,n=4):
     plt.gca().yaxis.set_major_formatter(mtick.FuncFormatter(unit_formatter))
     file_path = f"../output/problem_1_{title}_capacity.png"
     plt.savefig(file_path)
-def plot_solutions(WS,EV,TS,EEV):
+def plot_solutions(WS,EV,TS,EEV,prefix="problem_1"):
     # Sample data for the columns
     columns = ['EV','WS', 'TS', 'EEV']
     values = [EV, WS, TS, EEV]
@@ -44,11 +44,13 @@ def plot_solutions(WS,EV,TS,EEV):
         ax.text(bar.get_x() + bar.get_width()/2, yval + 0.5, f'{yval:,.2f}', 
                 ha='center', va='bottom', fontsize=10)
     ax.grid(True, axis='y', linestyle='--', alpha=0.5)
-    ax.set_ylim(380, 410)
+    ymin=min(values)-10
+    ymax=max(values)+10
+    ax.set_ylim(ymin, ymax)
     # Add labels and title
     ax.set_ylabel('Cost')
     ax.set_title('Solution Comparison')
-    file_path = f"../output/problem_1_solutions.png"
+    file_path = f"../output/{prefix}_solutions.png"
     plt.savefig(file_path)
 def plot_costs(c=c, q=q, n=4):
     # Ensure the vectors c and c_prod are of the correct size
@@ -57,14 +59,12 @@ def plot_costs(c=c, q=q, n=4):
     
     # Generate x positions for the bars
     x = np.arange(n)
-    width = 0.35  # Width of the bars
-
     # Create the plot
-    fig, ax = plt.subplots(figsize=(10, 6))
+    fig, ax = plt.subplots(figsize=(5, 3))
     
     # Define color map for the bars
     colors = plt.cm.viridis(np.linspace(0, 1, n))
-    width = 0.1 
+    width = 0.2
     # Plot bars for the two sets of values (c and c_prod)
     bars1 = ax.bar(x - width, c_inv, width, label='Investment Costs', color=colors, hatch='//')  # Diagonal stripes
     bars2 = ax.bar(x + width, c_prod_inv, width, label='Production Costs', color=colors, hatch='xx')  # Crosshatch pattern
@@ -77,11 +77,14 @@ def plot_costs(c=c, q=q, n=4):
     ax.set_xlabel('Technology')
     ax.set_ylabel('Cost')
     ax.set_title(f'Cost by Technology')
-    
+    ax.tick_params(axis='x', which='major')
     # Set x-ticks with appropriate labels
     ax.set_xticks(x)
     ax.set_xticklabels([f'{i+1}' for i in range(n)])  # Labeling as Tech 1, Tech 2, etc.
-    
+    ##Increase font size of labels
+    # Increase font size of labels
+ 
+    ax.tick_params(axis='both', which='major', labelsize=12)
     # Add grid lines to the y-axis
     ax.grid(True, axis='y', linestyle='--', alpha=0.5)
     
