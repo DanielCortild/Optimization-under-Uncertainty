@@ -6,6 +6,7 @@ import matplotlib.patches as patches
 import matplotlib.ticker as mtick
 
 from .TS import getTS_Naive, getTS_LShaped
+from ..Parameters import c, q_import
 
 def getTSPlot(counts, getTS, title):
     # Initialize arrays to store results
@@ -75,49 +76,45 @@ def getTSPlot_LShaped_Convergence(samples, iterations):
     fig_name = f"plots/TS_LShaped_Convergence_{time.time()}.png"
     plt.savefig(fig_name, bbox_inches='tight')
     print(f"Figure saved as {fig_name}")
-def plot_costs( n=5):
-    from ..Parameters import c,q_import
+
+def plot_costs(n=5):
     # Ensure the vectors c and c_prod are of the correct size
     c_inv = np.append(c,0)
     c_prod_inv = q_import
-    
+
     # Generate x positions for the bars
     x = np.arange(n)
     # Create the plot
     fig, ax = plt.subplots(figsize=(5, 3))
-    
+
     # Define color map for the bars
     colors = plt.cm.viridis(np.linspace(0, 1, n))
-    width = 0.2 
+    width = 0.2
     # Plot bars for the two sets of values (c and c_prod)
     bars1 = ax.bar(x - width, c_inv, width, label='Investment Costs', color=colors, hatch='//')  # Diagonal stripes
     bars2 = ax.bar(x + width, c_prod_inv, width, label='Production Costs', color=colors, hatch='xx')  # Crosshatch pattern
-    
-    
-    # Set the y-axis limits (you can adjust as needed)
-    #ax.set_ylim(0, 7)
-    
+
     # Labeling the axes and setting the title
     ax.set_xlabel('Technology')
     ax.set_ylabel('Cost')
     ax.set_title(f'Cost by Technology')
     ax.tick_params(axis='x', which='major', labelsize=15)
-    
+
     # Set x-ticks with appropriate labels
     ax.set_xticks(x)
     ax.set_xticklabels([f'{i+1}' for i in range(n)])  # Labeling as Tech 1, Tech 2, etc.
-    
+
     # Add grid lines to the y-axis
     ax.grid(True, axis='y', linestyle='--', alpha=0.5)
-    
+
     # Format the y-axis to include commas and format units
     ax.yaxis.set_major_formatter(mtick.FuncFormatter(lambda x, _: f'{x:,.2f}'))
-    
+
     # Add a legend to distinguish the two bars
     legend = ax.legend()
     for patch in legend.get_patches():
         patch.set_facecolor('none')
-    
+
     # Save the plot to a file
     file_path = f"../output/problem_2_costs.png"
-    plt.savefig(file_path)    
+    plt.savefig(file_path)

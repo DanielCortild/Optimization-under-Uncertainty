@@ -1,6 +1,6 @@
 # Investment Planning for Electricity Generation
 
-*Daniel Cortild, Anastasia Bouwsma, Esteban Castillo Mondragón*
+_Daniel Cortild, Anastasia Bouwsma, Esteban Castillo Mondragón_
 
 # Contents
 
@@ -8,4 +8,4 @@
 - [Part 2](tests/main2.py)
 - [Part 3](tests/main3.py)
 
-For reliability we created two seperate sets of code, the secondairy set is available [here](src/ElectricityInvestmentPlanning/altnerative%20code) as a set of notebooks
+For reliability we created two seperate sets of code, the secondairy set is available [here](tests/alternative) as a set of notebooks.
